@@ -13,4 +13,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(error)
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
