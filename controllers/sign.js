@@ -1,13 +1,15 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import User from "../models/user.js";
-import { emailIsAlreadyUsed, invalidUserSigninCredentials } from "../consts/errorMessages.js";
+import User from '../models/user.js';
+import {
+  emailIsAlreadyUsed,
+  invalidUserSigninCredentials,
+} from '../consts/errorMessages.js';
 import { CREATED, OK } from '../consts/statuses.js';
 
 import UnauthorizedError from '../errors/UnauthorizedError.js';
 import ConflictError from '../errors/ConflictError.js';
-import e from 'express';
 
 const { NODE_ENV, TOKEN_KEY } = process.env;
 

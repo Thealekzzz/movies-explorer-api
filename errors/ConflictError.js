@@ -1,4 +1,4 @@
-import { CONFLICT_ERROR  } from '../consts/statuses.js'
+import { CONFLICT_ERROR } from '../consts/statuses.js';
 
 class ConflictError extends Error {
   constructor(message) {

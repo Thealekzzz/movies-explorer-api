@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import auth from "../middlewares/auth.js";
+import auth from '../middlewares/auth.js';
 
-import userRouter from "./user.js";
-import signRouter from "./sign.js";
-import moviesRouter from "./movie.js";
+import userRouter from './user.js';
+import signRouter from './sign.js';
+import moviesRouter from './movie.js';
 
 const indexRouter = Router();
 
@@ -14,6 +14,6 @@ indexRouter.use('/', signRouter);
 
 indexRouter.all('*', (req, res) => {
   res.send({ message: 'Неизвестный API route' });
-})
+});
 
 export default indexRouter;

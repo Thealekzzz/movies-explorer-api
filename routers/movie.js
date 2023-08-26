@@ -1,7 +1,6 @@
-import { Router } from "express";
-import { getMe } from "../controllers/user.js";
-import { createMovie, deleteMovie, getMovies } from "../controllers/movie.js";
-import { createMovieValidation } from "../middlewares/validations/movie.js";
+import { Router } from 'express';
+import { createMovie, deleteMovie, getMovies } from '../controllers/movie.js';
+import { createMovieValidation } from '../middlewares/validations/movie.js';
 
 const moviesRouter = Router();
 

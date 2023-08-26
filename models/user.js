@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import validator from "validator";
+import mongoose from 'mongoose';
+import validator from 'validator';
 
 const userSchema = mongoose.Schema(
   {

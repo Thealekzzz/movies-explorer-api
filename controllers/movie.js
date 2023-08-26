@@ -5,10 +5,10 @@ import Movie from '../models/movie.js';
 
 export function getMovies(req, res, next) {
   Movie.find()
-  .then((movies) => {
-    res.status(OK).send(movies);
-  })
-  .catch(next);
+    .then((movies) => {
+      res.status(OK).send(movies);
+    })
+    .catch(next);
 }
 
 export function createMovie(req, res, next) {
@@ -41,28 +41,28 @@ export function createMovie(req, res, next) {
     movieId,
     owner: userId,
   })
-  .then((movie) => {
-    if (!movie) {
-      throw new NotFoundError(invalidMovieCredentials);
-    }
+    .then((movie) => {
+      if (!movie) {
+        throw new NotFoundError(invalidMovieCredentials);
+      }
 
-    res.status(OK).send(movie);
-  })
-  .catch(next);
+      res.status(OK).send(movie);
+    })
+    .catch(next);
 }
 
 export function deleteMovie(req, res, next) {
   const { id } = req.params;
 
   Movie.findOne({ movieId: id })
-  .then(async (movie) => {
-    if (!movie) {
-      throw new NotFoundError(movieNotFound);
-    }
+    .then(async (movie) => {
+      if (!movie) {
+        throw new NotFoundError(movieNotFound);
+      }
 
-    await movie.deleteOne()
+      await movie.deleteOne();
 
-    res.status(OK).send(movie);
-  })
-  .catch(next);
+      res.status(OK).send(movie);
+    })
+    .catch(next);
 }

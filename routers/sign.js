@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { login, register, signout } from "../controllers/sign.js";
-import { loginValidation, registerValidation } from "../middlewares/validations/user.js";
+import { Router } from 'express';
+import { login, register, signout } from '../controllers/sign.js';
+import { loginValidation, registerValidation } from '../middlewares/validations/user.js';
 
 const signRouter = Router();
 
