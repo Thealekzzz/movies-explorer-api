@@ -19,9 +19,9 @@ export function getMe(req, res, next) {
 
 export function patchMe(req, res, next) {
   const { _id: userId } = req.user;
-  const { name, about } = req.body;
+  const { name, email } = req.body;
 
-  User.findByIdAndUpdate(userId, { name, about }, { new: true, runValidators: true })
+  User.findByIdAndUpdate(userId, { name, email }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         throw new NotFoundError(userNotFound);
