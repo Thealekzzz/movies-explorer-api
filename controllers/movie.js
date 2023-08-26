@@ -1,5 +1,6 @@
 import { invalidMovieCredentials, movieNotFound } from '../consts/errorMessages.js';
 import { OK } from '../consts/statuses.js';
+import ForbiddenError from '../errors/ForbiddenError.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import Movie from '../models/movie.js';
 
@@ -53,11 +54,16 @@ export function createMovie(req, res, next) {
 
 export function deleteMovie(req, res, next) {
   const { id } = req.params;
+  const { _id: userId } = req.user;
 
   Movie.findOne({ movieId: id })
     .then(async (movie) => {
       if (!movie) {
         throw new NotFoundError(movieNotFound);
+      }
+
+      if (movie.owner !== userId) {
+        throw new ForbiddenError('Удалять фильмы других пользователей запрещено');
       }
 
       await movie.deleteOne();
