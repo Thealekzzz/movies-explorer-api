@@ -2,10 +2,12 @@ import { errors } from 'celebrate';
 
 import error from './middlewares/error.js';
 import indexRouter from './routers/index.js';
+import limiter from './middlewares/limiter.js';
 import { app } from './config.js';
 import { errorLogger, requestLogger } from './middlewares/logger.js';
 
 app.use(requestLogger);
+app.use(limiter);
 
 app.use(indexRouter);
 

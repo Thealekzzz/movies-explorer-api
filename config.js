@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import { configDotenv } from 'dotenv';
 
 configDotenv();
@@ -13,3 +14,4 @@ export const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(helmet());
