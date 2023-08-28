@@ -5,7 +5,9 @@ import NotFoundError from '../errors/NotFoundError.js';
 import Movie from '../models/movie.js';
 
 export function getMovies(req, res, next) {
-  Movie.find()
+  const { _id: userId } = req.user;
+
+  Movie.find({ owner: userId })
     .then((movies) => {
       res.status(OK).send(movies);
     })
