@@ -6,9 +6,12 @@ import { configDotenv } from 'dotenv';
 
 configDotenv();
 
-const { DATA_BASE_NAME } = process.env;
+const { NODE_ENV, DATA_BASE_NAME } = process.env;
 
-mongoose.connect(`mongodb://localhost:27017/${DATA_BASE_NAME || 'bitfilmsdb'}`, { useNewUrlParser: true });
+mongoose.connect(
+  `mongodb://localhost:27017/${NODE_ENV === 'production' ? DATA_BASE_NAME : 'bitfilmsdb'}`,
+  { useNewUrlParser: true }
+);
 
 export const app = express();
 
