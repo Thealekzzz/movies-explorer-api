@@ -27,7 +27,16 @@ export const register = async (req, res, next) => {
   newUser.save()
     .then((user) => {
       const { password: _, ...userWithoutPassword } = user._doc;
-      res.status(CREATED).send(userWithoutPassword);
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? TOKEN_KEY : '4a952aade591adfb64a57f228cb6c039', {
+        expiresIn: '7d',
+      });
+
+      res.cookie('token', token, {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+      });
+
+      res.status(CREATED).send({ ...userWithoutPassword, token });
     })
     .catch((err) => {
       if (err.code === 11000) {
