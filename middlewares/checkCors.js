@@ -1,4 +1,4 @@
-import { allowedCors } from '../config';
+import { allowedCors } from "../consts/other.js";
 
 const checkCors = (req, res, next) => {
   const { origin } = req.headers;
