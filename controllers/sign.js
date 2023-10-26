@@ -76,7 +76,9 @@ export const login = (req, res, next) => {
           httpOnly: true,
         });
 
-        res.status(OK).send({ token });
+        const { name, email } = user._doc
+
+        res.status(OK).send({ token, name, email });
       });
     })
     .catch(next);
