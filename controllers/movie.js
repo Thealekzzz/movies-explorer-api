@@ -1,4 +1,4 @@
-import { invalidMovieCredentials, movieNotFound } from '../consts/errorMessages.js';
+import { INVALID_MOVIE_CREDENTIALS, MOVIE_NOT_FOUND } from '../consts/errorMessages.js';
 import { OK, USER_SIDE_ERROR } from '../consts/statuses.js';
 import ForbiddenError from '../errors/ForbiddenError.js';
 import NotFoundError from '../errors/NotFoundError.js';
@@ -70,7 +70,7 @@ export async function createMovie(req, res, next) {
   })
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError(invalidMovieCredentials);
+        throw new NotFoundError(INVALID_MOVIE_CREDENTIALS);
       }
 
       res.status(OK).send(movie);
@@ -85,7 +85,7 @@ export function deleteMovie(req, res, next) {
   Movie.findOne({ movieId: id })
     .then(async (movie) => {
       if (!movie) {
-        throw new NotFoundError(movieNotFound);
+        throw new NotFoundError(MOVIE_NOT_FOUND);
       }
 
       if (movie.owner !== userId) {

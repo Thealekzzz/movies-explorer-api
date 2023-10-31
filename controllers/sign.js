@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/user.js';
 import {
-  emailIsAlreadyUsed,
-  invalidUserSigninCredentials,
+  EMAIL_IS_ALREADY_IN_USE,
+  INVALID_SIGNIN_CREDENTIALS,
 } from '../consts/errorMessages.js';
 import { CREATED, OK } from '../consts/statuses.js';
 
@@ -40,7 +40,7 @@ export const register = async (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError(emailIsAlreadyUsed));
+        next(new ConflictError(EMAIL_IS_ALREADY_IN_USE));
         return;
       }
 
@@ -54,7 +54,7 @@ export const login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError(invalidUserSigninCredentials);
+        throw new UnauthorizedError(INVALID_SIGNIN_CREDENTIALS);
       }
 
       bcrypt.compare(password, user.password, (err, matched) => {
@@ -64,7 +64,7 @@ export const login = (req, res, next) => {
         }
 
         if (!matched) {
-          throw new UnauthorizedError(invalidUserSigninCredentials);
+          throw new UnauthorizedError(INVALID_SIGNIN_CREDENTIALS);
         }
 
         const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? TOKEN_KEY : '4a952aade591adfb64a57f228cb6c039', {

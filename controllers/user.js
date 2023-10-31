@@ -1,4 +1,4 @@
-import { userNotFound } from '../consts/errorMessages.js';
+import { USER_NOT_FOUND } from '../consts/errorMessages.js';
 import { OK } from '../consts/statuses.js';
 import NotFoundError from '../errors/NotFoundError.js';
 import User from '../models/user.js';
@@ -9,7 +9,7 @@ export function getMe(req, res, next) {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError(userNotFound);
+        throw new NotFoundError(USER_NOT_FOUND);
       }
 
       res.status(OK).send(user);
@@ -24,7 +24,7 @@ export function patchMe(req, res, next) {
   User.findByIdAndUpdate(userId, { name, email }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError(userNotFound);
+        throw new NotFoundError(USER_NOT_FOUND);
       }
 
       res.status(OK).send(user);

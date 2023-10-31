@@ -1,4 +1,4 @@
-import { allowedCors } from "../consts/other.js";
+import { ALLOWED_CORS } from "../consts/other.js";
 
 const checkCors = (req, res, next) => {
   const { origin } = req.headers;
@@ -16,7 +16,7 @@ const checkCors = (req, res, next) => {
   }
 
   // проверяем, что источник запроса есть среди разрешённых
-  if (allowedCors.includes(origin)) {
+  if (ALLOWED_CORS.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
 
